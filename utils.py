@@ -56,8 +56,22 @@ def process_chinese_strings(strings):
         processed_list.append(s)
     return "\n".join(processed_list)
 
+
+def get_cur_dir():
+    import os
+    file_path = os.path.abspath(__file__)
+
+    # 获取当前文件所在的目录
+    dir_path = os.path.dirname(file_path)
+    print(dir_path)
+    return dir_path
+
 if __name__ == '__main__':
-    with open("./data/zh_Chat GPT for files (AI better then Chat GPT) [oWfEjvI7aes]_zh_summary.txt", "r") as f:
-        text = f.read()
-    a = process_chinese_strings(text)
-    print(a)
+    # with open("./data/zh_Chat GPT for files (AI better then Chat GPT) [oWfEjvI7aes]_zh_summary.txt", "r") as f:
+    #     text = f.read()
+    # a = process_chinese_strings(text)
+    # print(a)
+    get_cur_dir()
+    import torch
+
+    print(torch.cuda.is_available())

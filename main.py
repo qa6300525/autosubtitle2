@@ -3,6 +3,7 @@
 
 import os
 
+import utils
 from transcript import add_subtitles, extract_subtitle, add_subtitles_to_video_cmd
 from translate import translate_gpt, translate, user_open_ai, translate_with_chatgpt
 from summarization_langchain import summarize_with_langchain
@@ -21,8 +22,11 @@ def add_summary_to_video(path, summary_name, text, video_name, output_video_name
         print("output video exists")
         return
     image_name = path + summary_name.split(".")[0] + ".png"
+
+    font_path = f'{utils.get_cur_dir()}/resources/STHeiti Light.ttc'
+
     create_text_image(text=text, image_name=image_name,
-                      font_path='/System/Library/Fonts/STHeiti Light.ttc'
+                      font_path=font_path
                       , font_size=50, image_size=(1920, 1080))
     add_image_to_video(input_video=path + video_name, output_video=path + output_video_name,
                        image_name=image_name, duration=3)
@@ -81,6 +85,6 @@ if __name__ == "__main__":
 
     # 6. add summary to video
     final_video_name = output_video_name.split(".")[0] + "_final.mp4"
-    with open(path + summary_filename, "r") as f:
+    with open(path + summary_zh_filename, "r") as f:
         t_ans_text = f.read()
     add_summary_to_video(path, summary_filename, t_ans_text, output_video_name, final_video_name)

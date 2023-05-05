@@ -17,15 +17,20 @@ def add_subtitles_to_video_cmd(video_path, subtitle_paths, output_path):
     video_path = shlex.quote(video_path)
     subtitle_paths = [shlex.quote(subtitle_path) for subtitle_path in subtitle_paths]
     output_path = shlex.quote(output_path)
-
+    import torch
+    gpu_cmd = ""
+    if torch.cuda.is_available():
+        gpu_cmd = "-hwaccel cuvid -c:v h264_nvenc -gpu 0"
+    font_path = f'{utils.get_cur_dir()}/resources/STHeiti Light.ttc'
     cmd_subtitles = ""
     if len(subtitle_paths) == 1:  # 一个字幕
-        cmd_subtitles += f'-vf subtitles="{subtitle_paths[0]}:force_style=\'Fontsize=18\'" '
+        cmd_subtitles += f"""-vf subtitles="{subtitle_paths[0]}:force_style='Fontsize=18,FontFile={font_path}'" """
     elif len(subtitle_paths) == 2:  # 两个字幕
-        cmd_subtitles += f"""-vf \"subtitles={subtitle_paths[0]}:force_style='Fontsize=18,PrimaryColour=&H00FFFFFF,
-        Alignment=2',subtitles={subtitle_paths[1]}:force_style='Fontsize=24,PrimaryColour=&H0000FFFF,MarginV=30,
+        cmd_subtitles += f"""-vf \"subtitles={subtitle_paths[0]}:force_style='Fontsize=18,FontFile={font_path},
+        PrimaryColour=&H00FFFFFF,Alignment=2',subtitles={subtitle_paths[1]}:force_style='Fontsize=24,
+        FontFile={font_path},PrimaryColour=&H0000FFFF,MarginV=30,
         Alignment=2'\" """
-    cmd_line = f'ffmpeg -i {video_path} {cmd_subtitles} {output_path}'
+    cmd_line = f'ffmpeg -i {video_path} {gpu_cmd} {cmd_subtitles} {output_path}'
     print(cmd_line)
     import subprocess
     retcode = subprocess.call(cmd_line, shell=True)
