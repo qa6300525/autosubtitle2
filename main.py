@@ -54,14 +54,14 @@ if __name__ == "__main__":
             f.write(ans_text)
 
     # 4. translate summary
-    summary_filename = output_language_srt.split(".")[0] + "_summary.txt"
-    if os.path.exists(path + summary_filename):
+    summary_zh_filename = output_language_srt.split(".")[0] + "_summary.txt"
+    if os.path.exists(path + summary_zh_filename):
         print("summary file exists")
     else:
         with open(path + summary_filename, "r") as f:
             ans_text = f.read()
         t_ans_text = translate_with_chatgpt(ans_text, "zh")
-        with open(path + summary_filename, "w") as f:
+        with open(path + summary_zh_filename, "w") as f:
             f.write(t_ans_text)
 
     # 5. format split subtitle
