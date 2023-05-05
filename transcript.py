@@ -11,6 +11,9 @@ import shlex
 
 @utils.logit_time
 def add_subtitles_to_video_cmd(video_path, subtitle_paths, output_path):
+    if os.path.isfile(output_path):
+        print("output file exists")
+        return
     video_path = shlex.quote(video_path)
     subtitle_paths = [shlex.quote(subtitle_path) for subtitle_path in subtitle_paths]
     output_path = shlex.quote(output_path)
@@ -80,7 +83,11 @@ def extract_subtitle(path, video_name, srt_name, model_size, language):
     :param language: The language of the audio in the video file.
     :return: None.
     """
-    tic = time.time()
+    srt_path = path + srt_name
+    if os.path.exists(srt_path):
+        print(f"Subtitle file '{srt_path}' already exists.")
+        return
+
     print('Loading model...')
     filepath = os.path.join(path, video_name)
     model = whisper.load_model(model_size)
@@ -93,16 +100,13 @@ def extract_subtitle(path, video_name, srt_name, model_size, language):
     result_origin.get('language', language)
 
     print('Done')
-    toc = time.time()
-    print(f'Time for extract_subtitle: {toc - tic}s')
     from whisper.utils import WriteSRT
 
-    srt_path = path + srt_name
     with open(srt_path, "w", encoding="utf-8") as srt:
         writer = WriteSRT(dirname)
         options = {"max_line_width": 40, "max_line_count": 40, "highlight_words": True}
         writer.write_result(result_origin, srt, options=options)
-    return srt_path
+
 
 
 if __name__ == "__main__":

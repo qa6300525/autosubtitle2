@@ -184,9 +184,12 @@ def call_open_ai(prompt_text):
 
 @utils.logit_time
 def translate_gpt(path, input, input_language, output, output_language, chunk_size):
-    # openai.api_key = api_key
     file = path + input
     file_out = path + output
+    if os.path.exists(file_out):
+        print("file exists, skip")
+        return
+
     with open(file, "r") as f:
         text = f.read()
 

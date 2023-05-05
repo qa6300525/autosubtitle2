@@ -8,9 +8,9 @@ import utils
 
 def translate(text_list, src_lang, tgt_lang):
     global model
-    model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M")
+    model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M", device_map='auto')
     global tokenizer
-    tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
+    tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M", device_map='auto')
     output_list = []
     for t in text_list:
         ans = translate_with_m2m100(t, src_lang, tgt_lang)
