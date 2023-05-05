@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
     # 5.2 split subtitle zh
     format_output_language_srt = output_language_srt.split(".")[0] + "_format.srt"
-    split_subtitles(path + output_language_srt, path + format_srt_name, 45)
+    split_subtitles(path + output_language_srt, path + format_output_language_srt, 45)
 
     # 6. add subtitle to video
     output_video_name = video_name.split(".")[0] + "_subtitled.mp4"
