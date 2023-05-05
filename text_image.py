@@ -63,22 +63,11 @@ def add_image_to_video(input_video: str, output_video: str, image_name: str, dur
     # 合并视频流
     merged_video = ffmpeg.concat(image_stream, video_stream, v=1, a=0)
 
-    import torch
-    if torch.cuda.is_available():
-        encoder = "h264_nvenc"
-        # 设置 GPU 编号（默认为 0）
-        gpu_id = 0
-    else:
-        encoder = "libx264"
-        gpu_id = None
     # 合并音频和视频流
     output_stream = ffmpeg.output(
         merged_video,
         delayed_audio_stream,
         output_video,
-        vcodec=encoder,
-        **({"gpu": gpu_id} if gpu_id is not None else {}),
-        **({"preset": "medium"} if encoder == "libx264" else {}),
     ).overwrite_output()
 
     if os.path.exists(output_video):
