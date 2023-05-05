@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # 2. translate subtitle
     input_language, output_language, chunk_size = "en", "zh", 1000
-    output_language_srt = f"{srt_name}_{output_language}"
+    output_language_srt = srt_name.split(".")[0] + f"_{output_language}.srt"
     translate_gpt(path, srt_name, input_language, output_language_srt, output_language, chunk_size)
 
     # 3. summarize subtitle
@@ -55,13 +55,13 @@ if __name__ == "__main__":
     split_subtitles(path + srt_name, path + format_srt_name, 45)
 
     # 5.2 split subtitle zh
-    format_srt_name = output_language_srt.split(".")[0] + "_format.srt"
+    format_output_language_srt = output_language_srt.split(".")[0] + "_format.srt"
     split_subtitles(path + output_language_srt, path + format_srt_name, 45)
 
     # 6. add subtitle to video
     output_video_name = video_name.split(".")[0] + "_subtitled.mp4"
     output_video_path = path + output_video_name
-    subtitle_paths = [path + srt_name, path + output_language_srt]
+    subtitle_paths = [path + format_srt_name, path + format_output_language_srt]
     add_subtitles_to_video_cmd(video_path, subtitle_paths, output_video_path)
 
     # 6. add summary to video

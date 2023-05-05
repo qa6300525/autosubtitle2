@@ -14,6 +14,8 @@ import utils
 _ = load_dotenv(find_dotenv())
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = 'https://api.openai-proxy.com/v1'
+
+
 # print(openai.api_key)
 
 
@@ -185,8 +187,6 @@ def translate_gpt(path, input, input_language, output, output_language, chunk_si
     # openai.api_key = api_key
     file = path + input
     file_out = path + output
-    english_summarize_file = path + f"{input}_english_summarize.txt"
-    output_language_summarize_file = path + f"{input}_{output_language}_summarize.txt"
     with open(file, "r") as f:
         text = f.read()
 
@@ -194,10 +194,6 @@ def translate_gpt(path, input, input_language, output, output_language, chunk_si
         translate_subtitle(text, input_language, output_language, chunk_size)
     write_srt_file(file_out, translated_subtitle)
 
-    # write to summarize
-    write_file(english_summarize_file, summarize_with_english)
-
-    write_file(output_language_summarize_file, summarize_with_target_language)
     return file_out
 
 
