@@ -6,6 +6,68 @@ import ffmpeg
 from PIL import Image, ImageDraw, ImageFont
 import os
 import utils
+import imgkit
+from jinja2 import Template
+import markdown
+
+
+def create_text_image_v1(text: str, image_name: str, font_path: str, font_size: int,
+                         image_size=None) -> None:
+    if image_size is None:
+        image_size = (800, 400)
+    width, height = image_size
+
+    markdown_text = text
+
+    html_template = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 28px;
+                line-height: 1.8;
+                text-align: justify;
+                word-wrap: break-word;
+                margin: auto;
+                padding: 50px;
+                background-color: #f0f0f0;
+            }
+    
+            div {
+                width: 90%;
+                font-size: 1.25em;
+                line-height: 1.5em;
+                background-color: #ffffff;
+                padding: 2%;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                word-wrap: break-word;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            {{ content }}
+        </div>
+    </body>
+    </html>
+    '''
+    html_content = markdown.markdown(markdown_text)
+    template = Template(html_template)
+    html_output = template.render(content=html_content)
+
+    options = {
+        "format": "png",
+        "quality": 100,
+        "crop-h": height,
+        "crop-w": width,
+        "encoding": "UTF-8",
+        "zoom": 1.25
+    }
+
+    imgkit.from_string(html_output, image_name, options=options)
 
 
 def create_text_image(text: str, image_name: str, font_path: str, font_size: int,
@@ -93,10 +155,14 @@ def main():
 
 
 if __name__ == '__main__':
-    with open("./data/Nerfs.srt_zh_summarize.txt", "r") as f:
+    with open("./data/Nerfs_zh_summary.txt", "r") as f:
         text = f.read()
-    create_text_image(text=text, image_name='./data/text_image.png',
-                      font_path='/System/Library/Fonts/STHeiti Light.ttc'
-                      , font_size=50, image_size=(1920, 1080))
+    # create_text_image(text=text, image_name='./data/text_image.png',
+    #                   font_path='/System/Library/Fonts/STHeiti Light.ttc'
+    #                   , font_size=50, image_size=(1920, 1080))
+
+    create_text_image_v1(text=text, image_name='./data/text_image.png',
+                         font_path=f'{utils.get_cur_dir()}/STHeiti Light.ttc'
+                         , font_size=50, image_size=(1920, 1080))
     # add_image_to_video(input_video='./data/Nerfs_subtitled.mp4', output_video='./data/output_test.mp4',
     #                    image_name='./data/text_image.png', duration=5)

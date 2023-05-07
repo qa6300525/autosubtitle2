@@ -7,7 +7,7 @@ import utils
 from transcript import add_subtitles, extract_subtitle, add_subtitles_to_video_cmd
 from translate import translate_gpt, translate, user_open_ai, translate_with_chatgpt
 from summarization_langchain import summarize_with_langchain
-from text_image import create_text_image, add_image_to_video
+from text_image import create_text_image, add_image_to_video, create_text_image_v1
 from format_srt import split_subtitles
 
 
@@ -25,7 +25,7 @@ def add_summary_to_video(path, summary_name, text, video_name, output_video_name
 
     font_path = f'{utils.get_cur_dir()}/resources/STHeiti Light.ttc'
 
-    create_text_image(text=text, image_name=image_name,
+    create_text_image_v1(text=text, image_name=image_name,
                       font_path=font_path
                       , font_size=50, image_size=(1920, 1080))
     add_image_to_video(input_video=path + video_name, output_video=path + output_video_name,

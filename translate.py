@@ -138,7 +138,8 @@ Task: input is a text, translate the text to {output_language},
 Only translate the text part and keep the format. 
 Note: 
 1. Unable to understand or professional vocabulary is kept, do not need to translate.
-2. The translation is clear and concise, no more than 20 words.
+2. The translation is clear and concise.
+3. Keep the format.
 Text: ```{text}``` """
     return call_open_ai(prompt_text)
 

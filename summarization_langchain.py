@@ -21,7 +21,7 @@ def summarize_with_langchain(path, filename):
         text = f.read()
     new_text = utils.extract_text_from_subtitle(text)
     # Get your splitter ready
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=700, chunk_overlap=50)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1200, chunk_overlap=20)
 
     # Split your docs into texts
     texts = text_splitter.split_text(new_text)
@@ -33,23 +33,33 @@ def summarize_with_langchain(path, filename):
     llm = OpenAI(temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY"),
                  openai_api_base='https://api.openai-proxy.com/v1')
     user_prompt = """
-    Task: 
-    1. Generate a concise summary of the Text with a focus on at most 4 main topics. 
-    every topic at most 20 words and output format like 1. ... , 2. ..., 3. ...:
-    2. Generate an attractive title based on topic for your YouTube title.
-    Text: ```{text}```
+Task: 
+    1. Summarization: Generate a concise summary of the Text at most 125 words. 
+    2. Topics: Generate 5 main topics of the Text.
+    3. Tags: Generate 5 tags of the Text for youtube recommend.
+The output markdown format is as follows:
+# Summarization:
+# Topics: 
+    1. abc
+    2. dfe 
+    3. ...
+# Tags: aaaa,bbbb,cddd,deeea
+Text: ```{text}```
     """
     print(user_prompt)
     PROMPT = PromptTemplate(template=user_prompt, input_variables=["text"])
+    # chain = load_summarize_chain(llm, chain_type="stuff", verbose=True,
+    #                              combine_prompt=PROMPT)
     chain = load_summarize_chain(llm, chain_type="map_reduce", verbose=True,
                                  combine_prompt=PROMPT)
     ans_text = chain.run(docs)
+
     # 输出结果
     return ans_text
 
 
 if __name__ == '__main__':
-    o = summarize_with_langchain('./data/', 'Nerfs.srt')
+    o = summarize_with_langchain('./data/', 'Build Your Own Auto-GPT Apps with LangChain (Python Tutorial) [NYSWn1ipbgg].txt')
     t = translate_with_chatgpt(o, 'zh')
     print(o)
     print(t)
