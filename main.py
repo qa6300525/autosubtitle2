@@ -26,8 +26,7 @@ def add_summary_to_video(path, summary_name, text, video_name, output_video_name
     font_path = f'{utils.get_cur_dir()}/resources/STHeiti Light.ttc'
 
     create_text_image_v1(text=text, image_name=image_name,
-                      font_path=font_path
-                      , font_size=50, image_size=(1920, 1080))
+                         image_size=(1920, 1080))
     add_image_to_video(input_video=path + video_name, output_video=path + output_video_name,
                        image_name=image_name, duration=3)
 
@@ -36,7 +35,7 @@ if __name__ == "__main__":
     path = "./data/"
     # 创建文件夹
     os.makedirs(path, exist_ok=True)
-    video_name = "Nerfs.mp4"
+    video_name = "AutoGPT Tutorial - More Exciting Than ChatGPT [FeIIaJUN-4A].mp4"
 
     # 1. extract subtitle from video
     video_path = path + video_name

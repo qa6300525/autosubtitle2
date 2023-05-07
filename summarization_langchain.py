@@ -48,10 +48,12 @@ Text: ```{text}```
     """
     print(user_prompt)
     PROMPT = PromptTemplate(template=user_prompt, input_variables=["text"])
-    # chain = load_summarize_chain(llm, chain_type="stuff", verbose=True,
-    #                              combine_prompt=PROMPT)
-    chain = load_summarize_chain(llm, chain_type="map_reduce", verbose=True,
-                                 combine_prompt=PROMPT)
+    if len(user_prompt) + len(text) < 4000:
+        chain = load_summarize_chain(llm, chain_type="stuff", verbose=True,
+                                     prompt=PROMPT)
+    else:
+        chain = load_summarize_chain(llm, chain_type="map_reduce", verbose=True,
+                                     combine_prompt=PROMPT)
     ans_text = chain.run(docs)
 
     # 输出结果
@@ -59,7 +61,8 @@ Text: ```{text}```
 
 
 if __name__ == '__main__':
-    o = summarize_with_langchain('./data/', 'Build Your Own Auto-GPT Apps with LangChain (Python Tutorial) [NYSWn1ipbgg].txt')
+    o = summarize_with_langchain('./data/',
+                                 'Build Your Own Auto-GPT Apps with LangChain (Python Tutorial) [NYSWn1ipbgg].txt')
     t = translate_with_chatgpt(o, 'zh')
     print(o)
     print(t)

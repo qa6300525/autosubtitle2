@@ -5,13 +5,15 @@
 import ffmpeg
 from PIL import Image, ImageDraw, ImageFont
 import os
+
 import utils
 import imgkit
 from jinja2 import Template
 import markdown
+from io import BytesIO
 
 
-def create_text_image_v1(text: str, image_name: str, font_path: str, font_size: int,
+def create_text_image_v1(text: str, image_name: str,
                          image_size=None) -> None:
     if image_size is None:
         image_size = (800, 400)
@@ -21,38 +23,43 @@ def create_text_image_v1(text: str, image_name: str, font_path: str, font_size: 
 
     html_template = '''
     <!DOCTYPE html>
-    <html>
-    <head>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                font-size: 28px;
-                line-height: 1.8;
-                text-align: justify;
-                word-wrap: break-word;
-                margin: auto;
-                padding: 50px;
-                background-color: #f0f0f0;
-            }
-    
-            div {
-                width: 90%;
-                font-size: 1.25em;
-                line-height: 1.5em;
-                background-color: #ffffff;
-                padding: 2%;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                word-wrap: break-word;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            {{ content }}
-        </div>
-    </body>
-    </html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 23px;
+            line-height: 1.8;
+            text-align: justify;
+            # max-width: 1600px;
+            display: flex;
+            word-wrap: break-word;
+            margin: auto;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        div {
+            width: 1600px;
+            height: 900px;
+            overflow-y: auto;
+            font-size: 1.25em;
+            line-height: 1.5em;
+            background-color: #ffffff;
+            padding: 2%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        {{ content }}
+    </div>
+</body>
+</html>
+
     '''
     html_content = markdown.markdown(markdown_text)
     template = Template(html_template)
@@ -64,10 +71,24 @@ def create_text_image_v1(text: str, image_name: str, font_path: str, font_size: 
         "crop-h": height,
         "crop-w": width,
         "encoding": "UTF-8",
-        "zoom": 1.25
     }
 
-    imgkit.from_string(html_output, image_name, options=options)
+    img_bytes = imgkit.from_string(html_output, False, options=options)
+
+    with BytesIO(img_bytes) as b:
+        img = Image.open(b)
+        original_width, original_height = img.size
+        aspect_ratio = original_width / original_height
+        target_aspect_ratio = 16 / 9
+        if aspect_ratio < target_aspect_ratio:
+            new_width = min(width, original_width)
+            new_height = int(new_width / target_aspect_ratio)
+        else:
+            new_height = min(height, original_height)
+            new_width = int(new_height * target_aspect_ratio)
+
+        img_16_9 = img.resize((new_width, new_height), 1)
+        img_16_9.save(image_name)
 
 
 def create_text_image(text: str, image_name: str, font_path: str, font_size: int,
@@ -155,7 +176,7 @@ def main():
 
 
 if __name__ == '__main__':
-    with open("./data/Nerfs_zh_summary.txt", "r") as f:
+    with open("./data/AutoGPT Tutorial - More Exciting Than ChatGPT [FeIIaJUN-4A]_summary.txt", "r") as f:
         text = f.read()
     # create_text_image(text=text, image_name='./data/text_image.png',
     #                   font_path='/System/Library/Fonts/STHeiti Light.ttc'
