@@ -23,8 +23,6 @@ def add_summary_to_video(path, summary_name, text, video_name, output_video_name
         return
     image_name = path + summary_name.split(".")[0] + ".png"
 
-    font_path = f'{utils.get_cur_dir()}/resources/STHeiti Light.ttc'
-
     create_text_image_v1(text=text, image_name=image_name,
                          image_size=(1920, 1080))
     add_image_to_video(input_video=path + video_name, output_video=path + output_video_name,
@@ -33,7 +31,10 @@ def add_summary_to_video(path, summary_name, text, video_name, output_video_name
 
 def main(args):
     path = args.path
-    os.makedirs(path, exist_ok=True)
+
+    # 修复路径问题
+    if path[-1] != "/":
+        path += "/"
     video_name = args.video_name
 
     # 创建文件夹

@@ -38,12 +38,13 @@ Task:
     2. Topics: Generate 5 main topics of the Text.
     3. Tags: Generate 5 tags of the Text for youtube recommend.
 The output markdown format is as follows:
-# Summarization:
-# Topics: 
+## Summarization:
+## Topics: 
     1. abc
     2. dfe 
     3. ...
-# Tags: aaaa,bbbb,cddd,deeea
+## Tags: 
+    aaaa,bbbb,cddd,deeea
 Text: ```{text}```
     """
     print(user_prompt)
