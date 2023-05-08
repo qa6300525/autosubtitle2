@@ -133,11 +133,10 @@ def process_subtitle_file(content: str, max_length: int) -> str:
             total_length = len(line.encode("utf-8"))
             # 计算每个字符的展示时间
 
-            split_lines = split_subtitle_line_opt(line, max_length)
-            # if is_chinese(line):
-            #     split_lines = split_subtitle_line_zh(line, max_length)
-            # else:
-            #     split_lines = split_subtitle_line_en(line, max_length)
+            if is_chinese(line):
+                split_lines = split_subtitle_line_opt(line, max_length)
+            else:
+                split_lines = split_subtitle_line_en(line, max_length)
             if len(split_lines) > 1:
                 last_end = ""
                 for i, new_line in enumerate(split_lines):
@@ -174,6 +173,6 @@ def split_subtitles(input_file: str, output_file: str, max_length: int) -> None:
 if __name__ == "__main__":
     input_file = "./data/Build Your Own Auto-GPT Apps with LangChain (Python Tutorial) [NYSWn1ipbgg].txt"
     output_file = "output.srt"
-    max_length = 42
+    max_length = 52
 
     split_subtitles(input_file, output_file, max_length)

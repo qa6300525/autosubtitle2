@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
+import argparse
 import os
 
 import utils
@@ -31,11 +31,13 @@ def add_summary_to_video(path, summary_name, text, video_name, output_video_name
                        image_name=image_name, duration=3)
 
 
-if __name__ == "__main__":
-    path = "./data/"
+def main(args):
+    path = args.path
+    os.makedirs(path, exist_ok=True)
+    video_name = args.video_name
+
     # 创建文件夹
     os.makedirs(path, exist_ok=True)
-    video_name = "AutoGPT Tutorial - More Exciting Than ChatGPT [FeIIaJUN-4A].mp4"
 
     # 1. extract subtitle from video
     video_path = path + video_name
@@ -87,3 +89,13 @@ if __name__ == "__main__":
     with open(path + summary_zh_filename, "r") as f:
         t_ans_text = f.read()
     add_summary_to_video(path, summary_filename, t_ans_text, output_video_name, final_video_name)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Video Processing Script")
+    parser.add_argument("--path", type=str, default="./data/", help="Path to store the video and related files")
+    parser.add_argument("--video_name", type=str, required=True, help="Name of the video file to process (required)")
+
+    args = parser.parse_args()
+
+    main(args)
