@@ -1,0 +1,2840 @@
+1
+00:00:00,000 --> 00:00:02,080
+I really believe this is one of the best
+
+2
+00:00:02,081 --> 00:00:04,681
+opportunities for data scientists and AI engineers
+
+3
+00:00:04,682 --> 00:00:04,942
+right
+
+4
+00:00:05,120 --> 00:00:06,120
+now.
+
+5
+00:00:06,120 --> 00:00:08,521
+In this video, I will give you an introduction to
+
+6
+00:00:08,522 --> 00:00:10,237
+the Langchain library using Python.
+
+7
+00:00:10,360 --> 00:00:12,752
+Langchain is a framework for developing applications
+
+8
+00:00:12,753 --> 00:00:14,041
+using large language models.
+
+9
+00:00:14,160 --> 00:00:16,708
+I will walk you through all the modules, then the
+
+10
+00:00:16,709 --> 00:00:18,685
+quick start guide and then finally, we
+
+11
+00:00:18,760 --> 00:00:21,510
+will create our first app which will be a personal
+
+12
+00:00:21,511 --> 00:00:23,436
+assistant that can answer questions
+
+13
+00:00:23,560 --> 00:00:26,360
+about any YouTube video that you provided with.
+
+14
+00:00:26,360 --> 00:00:27,480
+So what is it?
+
+15
+00:00:27,480 --> 00:00:30,600
+It's a framework for developing applications powered
+
+16
+00:00:30,601 --> 00:00:32,881
+by large language models like OpenAI's
+
+17
+00:00:32,960 --> 00:00:34,520
+GPT models.
+
+18
+00:00:34,520 --> 00:00:37,411
+And instead of just interacting with these models
+
+19
+00:00:37,412 --> 00:00:39,418
+using an API, so basically you ask
+
+20
+00:00:39,480 --> 00:00:41,783
+a question, for example, this is what you do when
+
+21
+00:00:41,784 --> 00:00:43,382
+you interact with chat GPT, but in
+
+22
+00:00:43,480 --> 00:00:45,955
+the background is just an API that you send a
+
+23
+00:00:45,956 --> 00:00:48,211
+message to and then get the message back.
+
+24
+00:00:48,280 --> 00:00:51,088
+That's how you normally interact with large language
+
+25
+00:00:51,089 --> 00:00:51,467
+models.
+
+26
+00:00:52,520 --> 00:00:55,420
+So Langchain is a framework around that, that also
+
+27
+00:00:55,421 --> 00:00:57,625
+allows your application to become data
+
+28
+00:00:57,720 --> 00:00:59,440
+aware and agentic.
+
+29
+00:00:59,440 --> 00:01:02,347
+So data aware means that you can connect a language
+
+30
+00:01:02,348 --> 00:01:03,944
+model to other data sources.
+
+31
+00:01:04,040 --> 00:01:07,004
+So for example, your own data, company data that you
+
+32
+00:01:07,005 --> 00:01:09,057
+can build on and agentic means allow
+
+33
+00:01:09,200 --> 00:01:11,680
+a language model to interact with its environment.
+
+34
+00:01:11,680 --> 00:01:14,128
+So it's not just asking a question and then getting
+
+35
+00:01:14,129 --> 00:01:15,953
+information back, no, it's also acting
+
+36
+00:01:16,000 --> 00:01:18,585
+on that information by using various tools, for
+
+37
+00:01:18,586 --> 00:01:20,786
+example, that we will get into in a bit.
+
+38
+00:01:20,960 --> 00:01:23,969
+So now you want to learn a framework like Langchain
+
+39
+00:01:23,970 --> 00:01:25,976
+and I really want to get deep into
+
+40
+00:01:26,040 --> 00:01:28,680
+this because I believe there will be so many
+
+41
+00:01:28,681 --> 00:01:31,501
+opportunities if you understand this correctly.
+
+42
+00:01:31,640 --> 00:01:34,656
+So I work as a freelance data scientist and up until
+
+43
+00:01:34,657 --> 00:01:36,571
+this point, basically my job as a
+
+44
+00:01:36,640 --> 00:01:39,700
+data scientist is to help companies, usually larger
+
+45
+00:01:39,701 --> 00:01:42,041
+companies that have a lot of historical
+
+46
+00:01:42,120 --> 00:01:45,320
+data and use that to train machine learning models
+
+47
+00:01:45,321 --> 00:01:45,513
+on.
+
+48
+00:01:45,600 --> 00:01:47,994
+But what we're seeing right now with these
+
+49
+00:01:47,995 --> 00:01:50,674
+pre-trained large language models like OpenAI's
+
+50
+00:01:51,360 --> 00:01:54,828
+is that also smaller companies without huge amounts
+
+51
+00:01:54,829 --> 00:01:57,549
+of historical data can start to leverage
+
+52
+00:01:57,680 --> 00:01:59,160
+the power of AI.
+
+53
+00:01:59,160 --> 00:02:01,864
+And now me working as a freelancer, this provides me
+
+54
+00:02:01,865 --> 00:02:03,893
+with a lot of opportunities actually to
+
+55
+00:02:03,980 --> 00:02:07,082
+also work with smaller businesses doing smaller
+
+56
+00:02:07,083 --> 00:02:09,921
+project while also still being able to make
+
+57
+00:02:10,000 --> 00:02:12,080
+great impact for that company.
+
+58
+00:02:12,080 --> 00:02:15,200
+And also with really large machine learning projects
+
+59
+00:02:15,201 --> 00:02:17,241
+using lots of historical data, you
+
+60
+00:02:17,320 --> 00:02:19,721
+also never really quite know what you're going to
+
+61
+00:02:19,722 --> 00:02:19,918
+get.
+
+62
+00:02:19,980 --> 00:02:22,820
+So actually a lot of data science projects fail.
+
+63
+00:02:22,820 --> 00:02:25,421
+And I believe using these large language models for
+
+64
+00:02:25,422 --> 00:02:27,717
+small businesses or even for large businesses
+
+65
+00:02:27,820 --> 00:02:30,781
+will be a much more predictable way of doing AI
+
+66
+00:02:30,782 --> 00:02:33,554
+projects because the model is already there.
+
+67
+00:02:33,700 --> 00:02:36,052
+You know what it can do and now you just have to
+
+68
+00:02:36,053 --> 00:02:38,111
+provide it with extra information and tune
+
+69
+00:02:38,220 --> 00:02:40,320
+it to a specific use case.
+
+70
+00:02:40,320 --> 00:02:43,113
+So if you learn this, if you understand Langchain
+
+71
+00:02:43,114 --> 00:02:45,793
+and more specifically the underlying principles
+
+72
+00:02:46,020 --> 00:02:48,672
+basically of this particular framework, then I think
+
+73
+00:02:48,673 --> 00:02:50,356
+you will set yourself up for many
+
+74
+00:02:50,420 --> 00:02:52,260
+great opportunities to come.
+
+75
+00:02:52,260 --> 00:02:54,560
+You can really make a lot of money here if you
+
+76
+00:02:54,561 --> 00:02:55,861
+understand this correctly.
+
+77
+00:02:55,980 --> 00:02:57,440
+So let's get into this.
+
+78
+00:02:57,440 --> 00:03:00,296
+So I will start off by explaining all the different
+
+79
+00:03:00,297 --> 00:03:02,145
+modules to you, all the different
+
+80
+00:03:02,220 --> 00:03:05,062
+building blocks of the Langchain library that you
+
+81
+00:03:05,063 --> 00:03:07,499
+can use to start building your intelligent
+
+82
+00:03:07,620 --> 00:03:08,780
+apps.
+
+83
+00:03:08,780 --> 00:03:11,885
+And after briefly explaining each of the core
+
+84
+00:03:11,886 --> 00:03:14,853
+components, I will give you an example from
+
+85
+00:03:15,160 --> 00:03:18,080
+the quick start guide within VS code.
+
+86
+00:03:18,080 --> 00:03:21,020
+So you also have an idea of what it looks like in
+
+87
+00:03:21,021 --> 00:03:22,701
+code and how you can use it.
+
+88
+00:03:22,800 --> 00:03:25,850
+And there is also a GitHub page available for this
+
+89
+00:03:25,851 --> 00:03:27,498
+project that you can go to.
+
+90
+00:03:27,600 --> 00:03:30,300
+Link is in the description so you can clone it and
+
+91
+00:03:30,301 --> 00:03:31,435
+you can follow along.
+
+92
+00:03:31,540 --> 00:03:34,972
+Here I also explain how to set this up and what kind
+
+93
+00:03:34,973 --> 00:03:37,019
+of API keys you need and how to
+
+94
+00:03:37,160 --> 00:03:41,291
+set up the environment and install the keys in your
+
+95
+00:03:41,292 --> 00:03:42,102
+.env file.
+
+96
+00:03:42,200 --> 00:03:44,800
+So if you're not familiar with that, I would suggest
+
+97
+00:03:44,801 --> 00:03:46,651
+checking out this GitHub page so that
+
+98
+00:03:46,720 --> 00:03:48,160
+way you can follow along.
+
+99
+00:03:48,160 --> 00:03:51,472
+But coming back to the getting started page over
+
+100
+00:03:51,473 --> 00:03:51,818
+here.
+
+101
+00:03:51,920 --> 00:03:55,745
+So these are all the modules in increasing order of
+
+102
+00:03:55,746 --> 00:03:56,571
+complexity.
+
+103
+00:03:56,700 --> 00:03:59,550
+So we will start simple and we will start off with
+
+104
+00:03:59,551 --> 00:04:00,178
+the models.
+
+105
+00:04:00,280 --> 00:04:04,180
+So these are the model integrations that Langchain
+
+106
+00:04:04,181 --> 00:04:04,883
+supports.
+
+107
+00:04:05,000 --> 00:04:07,688
+And there is a whole list over here that you can
+
+108
+00:04:07,689 --> 00:04:08,249
+check out.
+
+109
+00:04:08,320 --> 00:04:10,560
+But you have the models from OpenAI.
+
+110
+00:04:10,560 --> 00:04:13,784
+You have for example Hugging Face and a whole lot of
+
+111
+00:04:13,785 --> 00:04:16,327
+other different models that are supported
+
+112
+00:04:16,400 --> 00:04:17,400
+right now.
+
+113
+00:04:17,400 --> 00:04:18,560
+So that is the first module.
+
+114
+00:04:18,560 --> 00:04:21,880
+So now let's see what it looks like in VS code.
+
+115
+00:04:21,880 --> 00:04:25,076
+So I have an example over here where I load the
+
+116
+00:04:25,077 --> 00:04:27,729
+OpenAI model from the Langchain library
+
+117
+00:04:27,880 --> 00:04:31,080
+and I can basically define my model by providing a
+
+118
+00:04:31,081 --> 00:04:33,833
+specific parameter here for the model name.
+
+119
+00:04:33,900 --> 00:04:36,828
+So for this example we are going to use the text
+
+120
+00:04:36,829 --> 00:04:37,805
+DaVinci 3 model.
+
+121
+00:04:38,040 --> 00:04:40,882
+If you go to the API reference for OpenAI you can
+
+122
+00:04:40,883 --> 00:04:42,855
+see there are a lot of models that
+
+123
+00:04:42,960 --> 00:04:43,960
+you can pick.
+
+124
+00:04:43,960 --> 00:04:45,880
+A lot of models that you can choose from.
+
+125
+00:04:45,880 --> 00:04:48,680
+I am currently on the waitlist for GPT-4.
+
+126
+00:04:48,680 --> 00:04:51,780
+So once you get access to that it will become even
+
+127
+00:04:51,781 --> 00:04:52,215
+better.
+
+128
+00:04:52,320 --> 00:04:54,960
+But coming back to the example over here.
+
+129
+00:04:54,960 --> 00:04:57,536
+So we load our model and then we can basically
+
+130
+00:04:57,537 --> 00:04:58,937
+provide it with a prompt.
+
+131
+00:04:59,060 --> 00:05:03,300
+So let's say write a poem about Python and AI.
+
+132
+00:05:03,300 --> 00:05:06,100
+So let's first initialize the model.
+
+133
+00:05:06,100 --> 00:05:07,940
+Then store our prompt.
+
+134
+00:05:07,940 --> 00:05:10,880
+And now we are going to call the model and put in
+
+135
+00:05:10,881 --> 00:05:11,541
+the prompt.
+
+136
+00:05:11,600 --> 00:05:15,350
+So it will now send out a connection to the OpenAI
+
+137
+00:05:15,351 --> 00:05:18,051
+API with our prompt and then it will
+
+138
+00:05:18,180 --> 00:05:20,440
+give us back the result.
+
+139
+00:05:20,440 --> 00:05:23,184
+So this is just a general way of interacting with
+
+140
+00:05:23,185 --> 00:05:25,481
+these large language models and something
+
+141
+00:05:25,540 --> 00:05:27,520
+that I can also do in chat GPT.
+
+142
+00:05:27,520 --> 00:05:30,720
+So here you can see the poem that we get back from
+
+143
+00:05:30,721 --> 00:05:31,233
+the API.
+
+144
+00:05:31,340 --> 00:05:33,780
+So this is nothing new up until this point.
+
+145
+00:05:33,780 --> 00:05:36,068
+But this is the starting point that we need in order
+
+146
+00:05:36,069 --> 00:05:37,785
+to interact with these language models.
+
+147
+00:05:37,900 --> 00:05:40,760
+Then next on the list is prompts.
+
+148
+00:05:40,760 --> 00:05:43,752
+And this you can use to manage your prompts,
+
+149
+00:05:43,753 --> 00:05:46,337
+optimize them and also serialize them.
+
+150
+00:05:46,420 --> 00:05:49,396
+So coming back to our project we have the prompt
+
+151
+00:05:49,397 --> 00:05:51,567
+template over here that we can also
+
+152
+00:05:51,640 --> 00:05:54,380
+import from the Lang chain library.
+
+153
+00:05:54,380 --> 00:05:56,900
+And the prompt template what we can do we can
+
+154
+00:05:56,901 --> 00:05:58,973
+provide it with an input variable and
+
+155
+00:05:59,060 --> 00:06:00,380
+then a template.
+
+156
+00:06:00,440 --> 00:06:03,551
+So what we can do with this is we can basically ask
+
+157
+00:06:03,552 --> 00:06:06,297
+user information or get some kind of variable
+
+158
+00:06:06,440 --> 00:06:10,160
+information and then put it into a prompt.
+
+159
+00:06:10,160 --> 00:06:13,160
+Similar to how you would use f-strings for example
+
+160
+00:06:13,161 --> 00:06:13,761
+in Python.
+
+161
+00:06:13,880 --> 00:06:16,230
+And this is just a nice class that you can use and
+
+162
+00:06:16,231 --> 00:06:17,970
+there are more things you can do with
+
+163
+00:06:18,080 --> 00:06:20,375
+it but this is just a basic example so we can
+
+164
+00:06:20,376 --> 00:06:22,314
+provide the prompt template over here.
+
+165
+00:06:22,440 --> 00:06:23,880
+Let me clear this up for you.
+
+166
+00:06:23,880 --> 00:06:26,532
+So what is a good name for a company that makes and
+
+167
+00:06:26,533 --> 00:06:28,405
+then between curly brackets product.
+
+168
+00:06:28,780 --> 00:06:32,044
+And then we see the input variables is product over
+
+169
+00:06:32,045 --> 00:06:34,477
+here and now we can call prompt.format
+
+170
+00:06:34,620 --> 00:06:37,020
+and then we can provide the product.
+
+171
+00:06:37,020 --> 00:06:38,833
+So after running this what you can see is that we
+
+172
+00:06:38,834 --> 00:06:40,092
+now have the prompt what is a good
+
+173
+00:06:40,180 --> 00:06:43,248
+name for a company that makes smart apps using large
+
+174
+00:06:43,249 --> 00:06:44,193
+language models.
+
+175
+00:06:44,300 --> 00:06:46,900
+And then the third component is memory.
+
+176
+00:06:46,900 --> 00:06:50,956
+So we can provide our intelligent app with both long
+
+177
+00:06:50,957 --> 00:06:53,609
+term and short term memory to make
+
+178
+00:06:53,760 --> 00:06:57,036
+smarter basically so it does not forget the previous
+
+179
+00:06:57,037 --> 00:06:59,053
+interaction that it has had with
+
+180
+00:06:59,160 --> 00:07:00,440
+the user.
+
+181
+00:07:00,440 --> 00:07:03,844
+So coming back to our example over here we can
+
+182
+00:07:03,845 --> 00:07:06,065
+import the conversation chain.
+
+183
+00:07:06,200 --> 00:07:09,311
+So that is also from Lang chain import conversation
+
+184
+00:07:09,312 --> 00:07:09,678
+chain.
+
+185
+00:07:09,740 --> 00:07:13,120
+So how this works is we can initialize a model again
+
+186
+00:07:13,121 --> 00:07:15,591
+and then start a conversation and then
+
+187
+00:07:15,720 --> 00:07:18,720
+we are going to call the dot predict method on the
+
+188
+00:07:18,721 --> 00:07:20,821
+conversation and provide it with an
+
+189
+00:07:20,880 --> 00:07:21,880
+input.
+
+190
+00:07:21,880 --> 00:07:24,820
+So right now the conversation is empty but we can
+
+191
+00:07:24,821 --> 00:07:27,101
+send this over and predict it and what
+
+192
+00:07:27,220 --> 00:07:29,248
+you can then see is that we will have a
+
+193
+00:07:29,249 --> 00:07:29,925
+conversation.
+
+194
+00:07:30,000 --> 00:07:32,300
+So there is a general prompt here so the following
+
+195
+00:07:32,301 --> 00:07:34,233
+is a friendly conversation between a human
+
+196
+00:07:34,340 --> 00:07:35,340
+and an AI.
+
+197
+00:07:35,340 --> 00:07:38,427
+The AI is talkative and provides lots of specific
+
+198
+00:07:38,428 --> 00:07:40,255
+details from its context etc.
+
+199
+00:07:40,320 --> 00:07:43,388
+So this is already engineered within the library and
+
+200
+00:07:43,389 --> 00:07:45,572
+then the human says hi there and then
+
+201
+00:07:45,700 --> 00:07:48,800
+the AI provides us with a response and that is the
+
+202
+00:07:48,801 --> 00:07:51,033
+output so we can print that and that
+
+203
+00:07:51,140 --> 00:07:53,890
+is hi there nice to meet you what can I do for you
+
+204
+00:07:53,891 --> 00:07:55,706
+and now what we can do next is we
+
+205
+00:07:55,780 --> 00:07:58,622
+have that output and we are going to make another
+
+206
+00:07:58,623 --> 00:08:00,653
+prediction by saying I'm doing well
+
+207
+00:08:00,760 --> 00:08:03,140
+just having a conversation with an AI.
+
+208
+00:08:03,140 --> 00:08:05,933
+So let's run this here you can see the history so
+
+209
+00:08:05,934 --> 00:08:08,157
+first we have the hi there then we have
+
+210
+00:08:08,220 --> 00:08:11,190
+the response from the AI and then you see our
+
+211
+00:08:11,191 --> 00:08:12,511
+response here again.
+
+212
+00:08:12,600 --> 00:08:15,304
+So what we've just entered and now we can print that
+
+213
+00:08:15,305 --> 00:08:16,865
+again and you can see that now
+
+214
+00:08:16,960 --> 00:08:19,459
+the AI is responding by it's great to be having a
+
+215
+00:08:19,460 --> 00:08:20,582
+conversation with you.
+
+216
+00:08:20,680 --> 00:08:22,160
+What would you like to talk about?
+
+217
+00:08:22,160 --> 00:08:24,839
+Alright and then next up is indexes so language
+
+218
+00:08:24,840 --> 00:08:27,348
+models are often more powerful when combined
+
+219
+00:08:27,460 --> 00:08:29,260
+with your own text data.
+
+220
+00:08:29,260 --> 00:08:32,167
+This module covers best practices for doing exactly
+
+221
+00:08:32,168 --> 00:08:32,453
+that.
+
+222
+00:08:32,520 --> 00:08:34,680
+So this is where it gets really exciting.
+
+223
+00:08:34,680 --> 00:08:37,032
+So this was the example that I was talking about
+
+224
+00:08:37,033 --> 00:08:38,797
+previously where you can build smart
+
+225
+00:08:38,880 --> 00:08:41,982
+applications for companies using their own data
+
+226
+00:08:41,983 --> 00:08:44,623
+their existing data and we will get more
+
+227
+00:08:44,700 --> 00:08:47,658
+into this in the example that I will provide at the
+
+228
+00:08:47,659 --> 00:08:49,631
+end of this video but for now just
+
+229
+00:08:49,740 --> 00:08:52,902
+know that there are document loaders text splitters
+
+230
+00:08:52,903 --> 00:08:55,259
+and vector stores and also retrievers.
+
+231
+00:08:55,340 --> 00:08:57,884
+So this is really exciting when we start to work
+
+232
+00:08:57,885 --> 00:08:58,839
+with our own data.
+
+233
+00:08:58,900 --> 00:09:01,600
+But for now let's continue to chains which is
+
+234
+00:09:01,601 --> 00:09:04,001
+another core component of the Lang chain
+
+235
+00:09:04,060 --> 00:09:07,210
+model so chains go beyond just a single large
+
+236
+00:09:07,211 --> 00:09:10,501
+language model call and our sequences of calls.
+
+237
+00:09:10,620 --> 00:09:12,762
+Lang chain provides a standard interface for chains
+
+238
+00:09:12,763 --> 00:09:14,065
+lots of integrations with other
+
+239
+00:09:14,140 --> 00:09:17,640
+tools and end to end chains for common applications.
+
+240
+00:09:17,660 --> 00:09:20,396
+So this is really where we start to bring things
+
+241
+00:09:20,397 --> 00:09:20,910
+together.
+
+242
+00:09:20,980 --> 00:09:24,018
+So the models and the prompts and the memory it's
+
+243
+00:09:24,019 --> 00:09:25,445
+nothing that new right.
+
+244
+00:09:25,540 --> 00:09:28,296
+We've seen it we can use it in chat GPT but now when
+
+245
+00:09:28,297 --> 00:09:30,046
+we start to chain things together
+
+246
+00:09:30,100 --> 00:09:32,140
+is when it gets really exciting.
+
+247
+00:09:32,140 --> 00:09:34,460
+So what does this look like in code?
+
+248
+00:09:34,460 --> 00:09:38,300
+So let's look at the LLM chain class that we can
+
+249
+00:09:38,301 --> 00:09:41,021
+import from Lang chain dot chains.
+
+250
+00:09:41,100 --> 00:09:44,748
+So given our previous model setup and the prompt
+
+251
+00:09:44,749 --> 00:09:47,561
+that we've provided so coming up with
+
+252
+00:09:47,720 --> 00:09:51,412
+a company name we can now actually start to run this
+
+253
+00:09:51,413 --> 00:09:51,839
+chain.
+
+254
+00:09:51,920 --> 00:09:54,728
+So the prompt template was just for engineering your
+
+255
+00:09:54,729 --> 00:09:55,107
+prompt.
+
+256
+00:09:55,160 --> 00:09:58,010
+The model is just for making a connection with the
+
+257
+00:09:58,011 --> 00:10:00,234
+API and now we can chain this together.
+
+258
+00:10:00,320 --> 00:10:03,870
+So let's quickly store this then set up this chain
+
+259
+00:10:03,871 --> 00:10:06,569
+so we provide the model and the prompt
+
+260
+00:10:06,720 --> 00:10:10,360
+as input parameters and now we can run this.
+
+261
+00:10:10,360 --> 00:10:12,420
+So let's try another example.
+
+262
+00:10:12,420 --> 00:10:16,684
+What is a good name for a company that makes AI chat
+
+263
+00:10:16,685 --> 00:10:19,473
+bots for dental offices AI DENTEC.
+
+264
+00:10:19,620 --> 00:10:20,620
+Love it.
+
+265
+00:10:20,620 --> 00:10:23,324
+All right so now you start to get a sense of how you
+
+266
+00:10:23,325 --> 00:10:25,093
+can turn this into an application.
+
+267
+00:10:25,160 --> 00:10:28,760
+You predefined the prompt over here and then you
+
+268
+00:10:28,761 --> 00:10:31,686
+combine it with user input and run that
+
+269
+00:10:31,800 --> 00:10:33,000
+using a chain.
+
+270
+00:10:33,000 --> 00:10:35,780
+So you could already turn this into a web app.
+
+271
+00:10:35,780 --> 00:10:40,200
+For example company name generator dot AI.
+
+272
+00:10:41,040 --> 00:10:44,680
+And now the trick here the key is being really smart
+
+273
+00:10:44,681 --> 00:10:47,481
+about what you put into these templates.
+
+274
+00:10:47,560 --> 00:10:50,160
+So this is a very straightforward example.
+
+275
+00:10:50,160 --> 00:10:52,610
+What is a good name for a company but you can get
+
+276
+00:10:52,611 --> 00:10:54,361
+really specific here and provide it
+
+277
+00:10:54,440 --> 00:10:56,870
+with lots of information really tailored to a
+
+278
+00:10:56,871 --> 00:10:59,031
+specific use case to get the result that
+
+279
+00:10:59,160 --> 00:11:01,480
+you are looking for given the user's input.
+
+280
+00:11:01,480 --> 00:11:03,680
+And I will give you a good example of this once we
+
+281
+00:11:03,681 --> 00:11:05,485
+start to develop the YouTube AI assistant
+
+282
+00:11:05,560 --> 00:11:06,680
+later in this video.
+
+283
+00:11:06,680 --> 00:11:08,880
+And then the last component agents.
+
+284
+00:11:08,880 --> 00:11:11,747
+So agents involve a large language model making
+
+285
+00:11:11,748 --> 00:11:14,432
+decisions about which actions to take taking
+
+286
+00:11:14,500 --> 00:11:17,984
+that action seeing an observation and repeating that
+
+287
+00:11:17,985 --> 00:11:19,057
+until it's done.
+
+288
+00:11:19,160 --> 00:11:23,080
+So this is really where you get to build your own
+
+289
+00:11:23,081 --> 00:11:26,121
+auto GPT baby AGI kind of applications
+
+290
+00:11:26,240 --> 00:11:30,150
+by using these agents and these agents can use
+
+291
+00:11:30,151 --> 00:11:30,661
+tools.
+
+292
+00:11:30,760 --> 00:11:33,828
+So there are tools agents toolkits and executors and
+
+293
+00:11:33,829 --> 00:11:36,071
+tools for example we have all kinds of
+
+294
+00:11:36,240 --> 00:11:39,204
+tools that are already supported straight out of the
+
+295
+00:11:39,205 --> 00:11:39,433
+box.
+
+296
+00:11:39,520 --> 00:11:42,744
+So we have Google searches we have Wikipedia we have
+
+297
+00:11:42,745 --> 00:11:44,977
+Google searches via the SERP API all
+
+298
+00:11:45,080 --> 00:11:47,840
+kinds of stuff that we can use.
+
+299
+00:11:47,840 --> 00:11:51,040
+And if we use these agents they will use the large
+
+300
+00:11:51,041 --> 00:11:52,001
+language model.
+
+301
+00:11:52,080 --> 00:11:55,304
+So for example the GPT model to assess which tool to
+
+302
+00:11:55,305 --> 00:11:57,537
+use and then use the tool to get the
+
+303
+00:11:57,600 --> 00:12:00,099
+information and then provide that back to the large
+
+304
+00:12:00,100 --> 00:12:00,835
+language model.
+
+305
+00:12:00,920 --> 00:12:03,468
+There is even a Pandas data frame agent that you can
+
+306
+00:12:03,469 --> 00:12:05,086
+use and it's mostly optimized for
+
+307
+00:12:05,200 --> 00:12:06,400
+question answering.
+
+308
+00:12:06,400 --> 00:12:09,173
+So here you can see a quick example and you can
+
+309
+00:12:09,174 --> 00:12:11,593
+basically ask it how many rows are there.
+
+310
+00:12:11,680 --> 00:12:14,641
+And then it knows that it can interact with the
+
+311
+00:12:14,642 --> 00:12:17,414
+Pandas data frame called the length function
+
+312
+00:12:17,480 --> 00:12:20,444
+to get the length of the data frame and then provide
+
+313
+00:12:20,445 --> 00:12:21,414
+that as a result.
+
+314
+00:12:21,520 --> 00:12:24,528
+So let's look at another example from the quick
+
+315
+00:12:24,529 --> 00:12:25,297
+start guide.
+
+316
+00:12:25,360 --> 00:12:28,675
+So if I want to start using agents what I can do is
+
+317
+00:12:28,676 --> 00:12:30,886
+I can import the initialized agent
+
+318
+00:12:31,280 --> 00:12:34,764
+type and the load tools to also provide it with some
+
+319
+00:12:34,765 --> 00:12:35,167
+tools.
+
+320
+00:12:35,280 --> 00:12:37,932
+And then coming back over here I can first list all
+
+321
+00:12:37,933 --> 00:12:38,453
+the tools.
+
+322
+00:12:38,520 --> 00:12:40,866
+So these are also on the website that was just
+
+323
+00:12:40,867 --> 00:12:42,550
+showing you in the documentation.
+
+324
+00:12:42,600 --> 00:12:45,824
+But here you can see the specific name that you have
+
+325
+00:12:45,825 --> 00:12:48,057
+to use in order to provide the agent
+
+326
+00:12:48,200 --> 00:12:49,240
+with that tool.
+
+327
+00:12:49,240 --> 00:12:51,890
+And now let's say for example we want to create an
+
+328
+00:12:51,891 --> 00:12:54,064
+agent and give it access to Wikipedia and
+
+329
+00:12:54,200 --> 00:12:56,280
+it should be able to do some math.
+
+330
+00:12:56,320 --> 00:12:59,015
+We can set up the tools like this then initialize
+
+331
+00:12:59,016 --> 00:13:01,381
+the agent provided with the tools the model
+
+332
+00:13:01,480 --> 00:13:04,652
+that is defined over here and then the agent type is
+
+333
+00:13:04,653 --> 00:13:06,727
+zero shot reacts description which
+
+334
+00:13:06,840 --> 00:13:09,480
+basically means that based on the prompt that we
+
+335
+00:13:09,481 --> 00:13:11,626
+give to the agent it will pick the best
+
+336
+00:13:11,760 --> 00:13:13,360
+tool to solve the problem.
+
+337
+00:13:13,360 --> 00:13:15,222
+So it will basically pick the tool on its own and
+
+338
+00:13:15,223 --> 00:13:16,743
+this is where it gets really interesting
+
+339
+00:13:16,800 --> 00:13:18,950
+because now you can provide an agent with a set of
+
+340
+00:13:18,951 --> 00:13:20,370
+tools and then it will figure out
+
+341
+00:13:20,480 --> 00:13:23,552
+on its own which tool to use to come up with the
+
+342
+00:13:23,553 --> 00:13:24,321
+best answer.
+
+343
+00:13:24,400 --> 00:13:27,080
+So let's try this query over here.
+
+344
+00:13:27,080 --> 00:13:29,012
+In what year was Python released and who's the
+
+345
+00:13:29,013 --> 00:13:30,567
+original creator multiply the year by
+
+346
+00:13:30,680 --> 00:13:33,669
+three and we only give it access to Wikipedia and
+
+347
+00:13:33,670 --> 00:13:33,975
+math.
+
+348
+00:13:34,040 --> 00:13:35,040
+All right.
+
+349
+00:13:35,040 --> 00:13:36,440
+So now let's first run this.
+
+350
+00:13:36,440 --> 00:13:38,600
+So let's see what it will do.
+
+351
+00:13:38,600 --> 00:13:39,920
+So new executor.
+
+352
+00:13:39,920 --> 00:13:41,990
+OK so it understands that it needs the action
+
+353
+00:13:41,991 --> 00:13:44,153
+Wikipedia and then you can see the input Python
+
+354
+00:13:44,240 --> 00:13:45,320
+programming language.
+
+355
+00:13:45,320 --> 00:13:47,966
+So it understands that that is the query that you
+
+356
+00:13:47,967 --> 00:13:49,695
+have to search for in Wikipedia.
+
+357
+00:13:49,800 --> 00:13:52,320
+Then it will get the history of Python summary.
+
+358
+00:13:52,520 --> 00:13:54,520
+So I have enough information to answer the question.
+
+359
+00:13:54,520 --> 00:13:57,068
+So the final answer Python was created in 1991 by
+
+360
+00:13:57,069 --> 00:13:59,097
+Gero van Rossem and the year multiplied
+
+361
+00:13:59,200 --> 00:14:02,520
+by three is five thousand seven hundred sixty three.
+
+362
+00:14:02,520 --> 00:14:03,520
+All right.
+
+363
+00:14:03,520 --> 00:14:04,520
+So this is really awesome right.
+
+364
+00:14:04,520 --> 00:14:06,920
+And this is beyond what chat GPT or the GPT models
+
+365
+00:14:06,921 --> 00:14:08,745
+are capable of because we can get live
+
+366
+00:14:08,840 --> 00:14:10,520
+information from the Internet.
+
+367
+00:14:10,520 --> 00:14:13,240
+And then also the results are stored as well.
+
+368
+00:14:13,240 --> 00:14:16,000
+So here you can just see the plain text string.
+
+369
+00:14:16,000 --> 00:14:17,520
+We now have that available.
+
+370
+00:14:17,520 --> 00:14:20,820
+And now if we start to combine everything together
+
+371
+00:14:20,821 --> 00:14:23,131
+so multiple chains multiple prompts
+
+372
+00:14:23,240 --> 00:14:27,564
+and then use agents to get information also use
+
+373
+00:14:27,565 --> 00:14:30,049
+memory to store everything.
+
+374
+00:14:30,160 --> 00:14:32,880
+Now we can actually build some really cool stuff.
+
+375
+00:14:32,880 --> 00:14:33,880
+All right.
+
+376
+00:14:33,880 --> 00:14:35,780
+So now I'm going to show you how you can create an
+
+377
+00:14:35,781 --> 00:14:37,339
+assistant that can answer questions about
+
+378
+00:14:37,400 --> 00:14:39,640
+the specific YouTube video.
+
+379
+00:14:39,640 --> 00:14:42,655
+So coming back to the indexes I've previously
+
+380
+00:14:42,656 --> 00:14:45,403
+explained how these large language models
+
+381
+00:14:45,520 --> 00:14:49,195
+become really powerful when you combine them with
+
+382
+00:14:49,196 --> 00:14:52,121
+your own data and your own data in this
+
+383
+00:14:52,280 --> 00:14:54,903
+scenario in this use case will be a YouTube
+
+384
+00:14:54,904 --> 00:14:57,344
+transcript that we are going to download
+
+385
+00:14:57,345 --> 00:14:58,199
+automatically.
+
+386
+00:14:58,400 --> 00:15:01,100
+But you can basically replace that transcript with
+
+387
+00:15:01,101 --> 00:15:03,207
+any other information and this approach
+
+388
+00:15:03,260 --> 00:15:04,680
+will still work.
+
+389
+00:15:04,680 --> 00:15:07,854
+So the chain library has document loaders text
+
+390
+00:15:07,855 --> 00:15:10,477
+splitters and vector stores and we are
+
+391
+00:15:10,560 --> 00:15:12,520
+going to use all of these.
+
+392
+00:15:12,520 --> 00:15:15,640
+So let's first talk about document loaders and these
+
+393
+00:15:15,641 --> 00:15:17,621
+are basically little helper tools
+
+394
+00:15:17,740 --> 00:15:21,653
+basically that make it easy to load certain
+
+395
+00:15:21,654 --> 00:15:22,564
+documents.
+
+396
+00:15:22,680 --> 00:15:24,738
+And here you can see everything that is supported
+
+397
+00:15:24,739 --> 00:15:25,159
+right now.
+
+398
+00:15:25,200 --> 00:15:27,260
+So we have things like Discord.
+
+399
+00:15:27,260 --> 00:15:28,440
+We have Figma.
+
+400
+00:15:28,440 --> 00:15:29,440
+We have Git.
+
+401
+00:15:29,440 --> 00:15:30,440
+We have Notion.
+
+402
+00:15:30,440 --> 00:15:35,420
+We have Obsidian PDFs PowerPoints but also YouTube.
+
+403
+00:15:35,420 --> 00:15:38,435
+So let's first see how we can get the YouTube
+
+404
+00:15:38,436 --> 00:15:41,652
+transcript given a video URL using this document
+
+405
+00:15:41,760 --> 00:15:42,760
+loader.
+
+406
+00:15:42,760 --> 00:15:45,862
+All right so coming back to VS Code we have the
+
+407
+00:15:45,863 --> 00:15:48,371
+following video URL over here which is
+
+408
+00:15:48,480 --> 00:15:52,368
+a podcast from the Lex Friedman podcast where he
+
+409
+00:15:52,369 --> 00:15:55,690
+talks to Sam Altman the CEO of OpenAI and
+
+410
+00:15:55,840 --> 00:15:59,319
+I thought this would be a nice video to use as an
+
+411
+00:15:59,320 --> 00:15:59,888
+example.
+
+412
+00:16:00,000 --> 00:16:03,536
+So we are going to first read the transcript of this
+
+413
+00:16:03,537 --> 00:16:06,053
+podcast this two and a half hour long
+
+414
+00:16:06,120 --> 00:16:08,660
+video using the document loader.
+
+415
+00:16:08,660 --> 00:16:11,924
+So for that we're going to import first the YouTube
+
+416
+00:16:11,925 --> 00:16:14,357
+loader from document loaders and we're
+
+417
+00:16:14,440 --> 00:16:17,200
+going to input the video URL.
+
+418
+00:16:17,200 --> 00:16:19,860
+So let's run this and see what we get.
+
+419
+00:16:19,860 --> 00:16:23,379
+So now we have the loader and to get the transcript
+
+420
+00:16:23,380 --> 00:16:26,140
+then we call the loader dot load method.
+
+421
+00:16:26,220 --> 00:16:29,020
+So we call this method over here and then run that
+
+422
+00:16:29,021 --> 00:16:30,925
+and then that will run for a while
+
+423
+00:16:30,980 --> 00:16:34,165
+and now we can have a look at the transcript over
+
+424
+00:16:34,166 --> 00:16:36,896
+here which is basically a very long string
+
+425
+00:16:37,060 --> 00:16:39,580
+over here with all the text in here.
+
+426
+00:16:39,580 --> 00:16:42,232
+All right so now we have the full transcript and it
+
+427
+00:16:42,233 --> 00:16:44,001
+is within a list and we can access
+
+428
+00:16:44,100 --> 00:16:47,324
+that using the page content to get the actual string
+
+429
+00:16:47,325 --> 00:16:48,689
+the actual transcript.
+
+430
+00:16:48,800 --> 00:16:52,115
+But now we have the following problem if I run this
+
+431
+00:16:52,116 --> 00:16:54,261
+to see how long the transcript is
+
+432
+00:16:54,400 --> 00:16:56,760
+we can see how many tokens there are in there.
+
+433
+00:16:56,760 --> 00:16:59,984
+So this is the total amount of characters and we can
+
+434
+00:16:59,985 --> 00:17:01,659
+see that it's over 100,000.
+
+435
+00:17:01,740 --> 00:17:05,004
+Now this was really a aha moment for me because you
+
+436
+00:17:05,005 --> 00:17:07,565
+cannot just provide this full transcript
+
+437
+00:17:07,680 --> 00:17:11,040
+with over 100,000 characters to the API of these
+
+438
+00:17:11,041 --> 00:17:12,581
+large language models.
+
+439
+00:17:12,660 --> 00:17:13,780
+It's just too large.
+
+440
+00:17:13,780 --> 00:17:16,525
+So if you want the model to be able to answer
+
+441
+00:17:16,526 --> 00:17:19,088
+questions about this transcript we have to
+
+442
+00:17:19,220 --> 00:17:22,600
+find a workaround to provide it with the information
+
+443
+00:17:22,601 --> 00:17:25,721
+it needs to answer the questions without sending
+
+444
+00:17:25,860 --> 00:17:27,640
+the transcript in full.
+
+445
+00:17:27,640 --> 00:17:30,864
+And that is where the text splitters come in because
+
+446
+00:17:30,865 --> 00:17:32,973
+if you go to the API documentation
+
+447
+00:17:33,040 --> 00:17:37,890
+you can see the max tokens over here per model for
+
+448
+00:17:37,891 --> 00:17:39,249
+OpenAI models.
+
+449
+00:17:39,400 --> 00:17:42,884
+And if you use the latest model that I can use right
+
+450
+00:17:42,885 --> 00:17:45,163
+now so the GPT 3.5 turbo it's 4096
+
+451
+00:17:45,300 --> 00:17:47,500
+tokens that you can input to the API.
+
+452
+00:17:47,500 --> 00:17:50,052
+If you're already on GPT-4 you can basically
+
+453
+00:17:50,053 --> 00:17:52,431
+increase the token size but for now we're
+
+454
+00:17:52,520 --> 00:17:55,120
+stuck to around 4000 tokens.
+
+455
+00:17:55,120 --> 00:17:58,894
+So how do we deal with that if we have a transcript
+
+456
+00:17:58,895 --> 00:18:00,597
+of over 100,000 tokens?
+
+457
+00:18:00,680 --> 00:18:05,219
+We can use the text splitter to first split this up
+
+458
+00:18:05,220 --> 00:18:06,822
+in several chunks.
+
+459
+00:18:06,960 --> 00:18:10,122
+So what this basically will do is I say hey we have
+
+460
+00:18:10,123 --> 00:18:12,293
+this transcript over here this size
+
+461
+00:18:12,400 --> 00:18:16,192
+but I want to split it up in chunk sizes of 1000
+
+462
+00:18:16,193 --> 00:18:17,378
+character each.
+
+463
+00:18:17,480 --> 00:18:20,130
+And here you can also specify if you want there to
+
+464
+00:18:20,131 --> 00:18:21,191
+be a bit of overlap.
+
+465
+00:18:21,300 --> 00:18:24,888
+And if I run this so let's run the text splitter and
+
+466
+00:18:24,889 --> 00:18:27,718
+then sorry first define the text splitter
+
+467
+00:18:27,860 --> 00:18:30,359
+and then call the text splitter split documents and
+
+468
+00:18:30,360 --> 00:18:32,173
+then put in the transcript that we've
+
+469
+00:18:32,280 --> 00:18:33,280
+just created.
+
+470
+00:18:33,280 --> 00:18:36,073
+So that is the object over here the list with the
+
+471
+00:18:36,074 --> 00:18:38,240
+document and the page content in here.
+
+472
+00:18:38,320 --> 00:18:42,064
+And if I run that so let's do that and now I now
+
+473
+00:18:42,065 --> 00:18:44,873
+have the docs and what we can now do
+
+474
+00:18:45,020 --> 00:18:48,524
+if we have a look at what docs is we can now see
+
+475
+00:18:48,525 --> 00:18:51,080
+that is just a list with a bunch of
+
+476
+00:18:51,220 --> 00:18:52,600
+split up documents.
+
+477
+00:18:52,600 --> 00:18:55,866
+So it has taken the very large transcript over
+
+478
+00:18:55,867 --> 00:18:58,849
+100,000 tokens and split it up into chunks
+
+479
+00:18:58,940 --> 00:18:59,940
+of 1000.
+
+480
+00:18:59,940 --> 00:19:01,640
+Okay so that is the first step.
+
+481
+00:19:01,640 --> 00:19:04,139
+Okay so now you might wonder okay so we've split up
+
+482
+00:19:04,140 --> 00:19:05,855
+the transcript but we can still not
+
+483
+00:19:05,920 --> 00:19:08,820
+provide it to the API right?
+
+484
+00:19:08,820 --> 00:19:11,576
+Correct and that is where the next part comes in and
+
+485
+00:19:11,577 --> 00:19:13,697
+that is embeddings and vector databases.
+
+486
+00:19:13,780 --> 00:19:16,230
+So this is quite technical and I won't go into the
+
+487
+00:19:16,231 --> 00:19:17,848
+details in this video I will make
+
+488
+00:19:17,960 --> 00:19:20,210
+future videos about this because for now I want to
+
+489
+00:19:20,211 --> 00:19:21,741
+give you a brief demonstration and
+
+490
+00:19:21,840 --> 00:19:24,780
+overview of how to use this and then later we can
+
+491
+00:19:24,781 --> 00:19:25,861
+get more specific.
+
+492
+00:19:25,960 --> 00:19:29,088
+But first we use the embeddings from OpenAI to
+
+493
+00:19:29,089 --> 00:19:31,945
+basically convert the text the splits that
+
+494
+00:19:32,040 --> 00:19:35,189
+we have just created of the 1000 tokens long to
+
+495
+00:19:35,190 --> 00:19:37,937
+convert them into vectors and vectors are
+
+496
+00:19:38,020 --> 00:19:41,794
+basically a in this case a numerical representation
+
+497
+00:19:41,795 --> 00:19:43,201
+of the text itself.
+
+498
+00:19:43,300 --> 00:19:47,360
+So we convert the text to a vector of numbers.
+
+499
+00:19:47,840 --> 00:19:51,412
+We will use the face library which is a library
+
+500
+00:19:51,413 --> 00:19:54,605
+developed by Facebook that you can use for
+
+501
+00:19:54,680 --> 00:19:57,120
+efficient similarity search.
+
+502
+00:19:57,120 --> 00:20:00,894
+We will combine that to basically create a database
+
+503
+00:20:00,895 --> 00:20:03,485
+of all these documents that you see
+
+504
+00:20:03,560 --> 00:20:07,137
+over here and when a user wants to ask a question
+
+505
+00:20:07,138 --> 00:20:10,204
+with regards to this YouTube transcript we
+
+506
+00:20:10,320 --> 00:20:14,320
+will first perform a similarity search to find the
+
+507
+00:20:14,321 --> 00:20:16,801
+chunks that are most similar to
+
+508
+00:20:16,960 --> 00:20:19,280
+the prompt that the user is asking.
+
+509
+00:20:19,280 --> 00:20:21,776
+So what this means is that we have this database
+
+510
+00:20:21,777 --> 00:20:24,325
+with all these vectors and we can do a similarity
+
+511
+00:20:24,440 --> 00:20:26,870
+search on that to find the relevant pieces of
+
+512
+00:20:26,871 --> 00:20:29,031
+information that we need and now this is
+
+513
+00:20:29,120 --> 00:20:31,804
+the critical key to working with these large
+
+514
+00:20:31,805 --> 00:20:33,879
+language models and your own data.
+
+515
+00:20:33,960 --> 00:20:36,976
+First create a filter a lookup table of some sort to
+
+516
+00:20:36,977 --> 00:20:38,891
+get just the information that you
+
+517
+00:20:39,040 --> 00:20:42,016
+want and then provide that to the large language
+
+518
+00:20:42,017 --> 00:20:43,567
+model with your question.
+
+519
+00:20:43,680 --> 00:20:46,852
+So if we bring all of that together in this function
+
+520
+00:20:46,853 --> 00:20:48,805
+create DB from YouTube video URL
+
+521
+00:20:48,880 --> 00:20:52,880
+we can for any given video URL load the transcript
+
+522
+00:20:52,881 --> 00:20:56,321
+then split it up into chunks of 1000 tokens
+
+523
+00:20:56,400 --> 00:20:59,700
+and then put it into a vector database object that
+
+524
+00:20:59,701 --> 00:21:01,945
+we can return using this function.
+
+525
+00:21:02,160 --> 00:21:06,087
+Now what we can then do next is we can provide this
+
+526
+00:21:06,088 --> 00:21:08,860
+to another function the get response
+
+527
+00:21:08,960 --> 00:21:12,080
+from query where we use this database that we've
+
+528
+00:21:12,081 --> 00:21:14,811
+just created to answer specific questions.
+
+529
+00:21:14,880 --> 00:21:16,000
+So how does this work?
+
+530
+00:21:16,000 --> 00:21:18,989
+Well we provide the database and the query so the
+
+531
+00:21:18,990 --> 00:21:21,430
+question you want to ask about the video
+
+532
+00:21:21,520 --> 00:21:24,172
+to this function get response from query and then we
+
+533
+00:21:24,173 --> 00:21:26,162
+also have a parameter k over here which
+
+534
+00:21:26,240 --> 00:21:28,484
+defaults to four and here you can see the reasoning
+
+535
+00:21:28,485 --> 00:21:29,849
+behind it but that is basically
+
+536
+00:21:29,920 --> 00:21:32,312
+to maximize the amount of tokens that we send to the
+
+537
+00:21:32,313 --> 00:21:34,199
+API and then this is where it gets really
+
+538
+00:21:34,320 --> 00:21:38,480
+interesting is we perform a similarity search on the
+
+539
+00:21:38,481 --> 00:21:41,681
+database using the query and we return k
+
+540
+00:21:41,840 --> 00:21:42,880
+documents.
+
+541
+00:21:42,880 --> 00:21:46,405
+So given our question it will go through all of
+
+542
+00:21:46,406 --> 00:21:50,081
+these documents and it will find the most similar
+
+543
+00:21:50,160 --> 00:21:52,864
+ones so it will do a similarity search and then what
+
+544
+00:21:52,865 --> 00:21:55,153
+we do once we have all the documents so four
+
+545
+00:21:55,280 --> 00:21:58,430
+by default we join them into one single string and
+
+546
+00:21:58,431 --> 00:22:01,140
+then we create a model over here and now we
+
+547
+00:22:01,280 --> 00:22:03,926
+use the GPT three and a half turbo model and next
+
+548
+00:22:03,927 --> 00:22:06,519
+you define a template for your prompt like we've
+
+549
+00:22:06,640 --> 00:22:09,188
+seen earlier in this video and this is where you can
+
+550
+00:22:09,189 --> 00:22:11,443
+get really creative so in this example you are
+
+551
+00:22:11,520 --> 00:22:13,968
+a helpful assistant that can answer questions about
+
+552
+00:22:13,969 --> 00:22:16,177
+youtube videos based on the video's transcript
+
+553
+00:22:16,240 --> 00:22:18,740
+and then we provide the input parameter docs which
+
+554
+00:22:18,741 --> 00:22:20,741
+we will replace by the string that we've
+
+555
+00:22:20,880 --> 00:22:23,480
+just created so all of the document information only
+
+556
+00:22:23,481 --> 00:22:25,631
+use factual information from the transcript
+
+557
+00:22:25,680 --> 00:22:27,836
+to answer the question if you feel like you don't
+
+558
+00:22:27,837 --> 00:22:29,861
+have enough information to answer the question
+
+559
+00:22:29,920 --> 00:22:32,970
+say i don't know your answer should be verbose and
+
+560
+00:22:32,971 --> 00:22:35,777
+details so like i've said this is really where
+
+561
+00:22:35,840 --> 00:22:38,630
+you can get creative and based on the kind of
+
+562
+00:22:38,631 --> 00:22:41,607
+applications that you want to create design your
+
+563
+00:22:41,760 --> 00:22:44,710
+template over here and basically by creating minor
+
+564
+00:22:44,711 --> 00:22:47,248
+changes within this template you can create
+
+565
+00:22:47,360 --> 00:22:50,369
+entirely different apps for all kinds of industries
+
+566
+00:22:50,370 --> 00:22:53,202
+all right and then the next step is to chain all
+
+567
+00:22:53,280 --> 00:22:56,452
+of this together and since we are now using the chat
+
+568
+00:22:56,453 --> 00:22:59,198
+function using the GPT three and a half turbo
+
+569
+00:22:59,280 --> 00:23:02,220
+model this is slightly different but you can find
+
+570
+00:23:02,221 --> 00:23:05,221
+everything in the quick start so first it explains
+
+571
+00:23:05,280 --> 00:23:08,132
+how you can use the general models and then it
+
+572
+00:23:08,133 --> 00:23:11,047
+continues with the chat models so the syntax is
+
+573
+00:23:11,120 --> 00:23:14,120
+a little different because here we have the system
+
+574
+00:23:14,121 --> 00:23:17,181
+message prompt and the human message prompt so this
+
+575
+00:23:17,280 --> 00:23:19,830
+is nice to first define a message a prompt for the
+
+576
+00:23:19,831 --> 00:23:22,024
+system basically so that is the description
+
+577
+00:23:22,160 --> 00:23:25,210
+over here the template explaining the AI the agent
+
+578
+00:23:25,211 --> 00:23:28,017
+basically what it should do and then we have a
+
+579
+00:23:28,160 --> 00:23:31,760
+prompt to alter the question or the input that the
+
+580
+00:23:31,761 --> 00:23:35,145
+human is providing so i for example edit answer
+
+581
+00:23:35,280 --> 00:23:37,524
+the following question and then put in the question
+
+582
+00:23:37,525 --> 00:23:39,549
+over here so i'm not sure if this is necessary
+
+583
+00:23:39,680 --> 00:23:42,332
+right now but you can alter the input from the user
+
+584
+00:23:42,333 --> 00:23:44,517
+as well so that is how you would do it and
+
+585
+00:23:44,640 --> 00:23:47,700
+then it combines all of that into a chat prompt and
+
+586
+00:23:47,701 --> 00:23:50,341
+then like we've seen earlier we can put that
+
+587
+00:23:50,400 --> 00:23:53,988
+into a chain the chat and the prompt and then we can
+
+588
+00:23:53,989 --> 00:23:56,818
+run that chain again also like we've seen
+
+589
+00:23:56,960 --> 00:24:00,479
+before and then we just put in a query and the docs
+
+590
+00:24:00,480 --> 00:24:03,585
+that we have defined earlier all right so now
+
+591
+00:24:03,680 --> 00:24:06,179
+we have all the building blocks that we need and we
+
+592
+00:24:06,180 --> 00:24:08,238
+can actually start to call these functions
+
+593
+00:24:08,320 --> 00:24:11,941
+so again let's define the video url and let's first
+
+594
+00:24:11,942 --> 00:24:14,924
+create a database from this video so let's
+
+595
+00:24:15,040 --> 00:24:17,536
+see what that will do so it goes quite quickly so it
+
+596
+00:24:17,537 --> 00:24:19,793
+gets the transcript and then converts it so now
+
+597
+00:24:19,840 --> 00:24:22,752
+we have the database object and now we can fill in a
+
+598
+00:24:22,753 --> 00:24:25,329
+query over here and then call the get response
+
+599
+00:24:25,440 --> 00:24:28,723
+from query function to answer a specific question
+
+600
+00:24:28,724 --> 00:24:32,007
+about this video transcript so let's actually see
+
+601
+00:24:32,080 --> 00:24:35,069
+what they are talking about and let's say i don't
+
+602
+00:24:35,070 --> 00:24:37,815
+have time to watch all of this but i'm pretty
+
+603
+00:24:37,920 --> 00:24:41,235
+interested in what they have to say about a gi over
+
+604
+00:24:41,236 --> 00:24:43,966
+here so i can come over here and listen to
+
+605
+00:24:44,080 --> 00:24:46,816
+what they have to say but i can now also come to
+
+606
+00:24:46,817 --> 00:24:49,439
+this application over here or this function so
+
+607
+00:24:49,520 --> 00:24:53,160
+to say and then fill in what are they saying about a
+
+608
+00:24:53,161 --> 00:24:56,311
+gi so that is the query and now let's get the
+
+609
+00:24:56,400 --> 00:24:59,732
+response and let's print it so there we go in the
+
+610
+00:24:59,733 --> 00:25:02,521
+video transcript they are discussing a gi
+
+611
+00:25:02,640 --> 00:25:05,240
+artificial general intelligence and the work being
+
+612
+00:25:05,241 --> 00:25:07,737
+done by open ai to develop it sam altman the ceo
+
+613
+00:25:08,400 --> 00:25:11,389
+and so on so it's answering the question based on
+
+614
+00:25:11,390 --> 00:25:14,196
+the transcript awesome so let's ask it another
+
+615
+00:25:14,320 --> 00:25:17,482
+question who are the hosts of this podcast so let's
+
+616
+00:25:17,483 --> 00:25:20,335
+run it all at once so it will do some thinking
+
+617
+00:25:21,040 --> 00:25:23,108
+first get the response and then based on the
+
+618
+00:25:23,109 --> 00:25:25,177
+transcript is not clear who the hosts of the
+
+619
+00:25:25,280 --> 00:25:27,215
+podcasts are however it is mentioned that the
+
+620
+00:25:27,216 --> 00:25:29,237
+podcast features conversations with guests such
+
+621
+00:25:29,280 --> 00:25:32,224
+as sam altman jordan peterson and is hosted by
+
+622
+00:25:32,225 --> 00:25:34,913
+someone named lax friedman okay so this is
+
+623
+00:25:35,040 --> 00:25:37,790
+really interesting it is admitting that it doesn't
+
+624
+00:25:37,791 --> 00:25:40,321
+have all the information but it is recognizing
+
+625
+00:25:40,400 --> 00:25:43,260
+all the entities and it is correct it's a podcast by
+
+626
+00:25:43,261 --> 00:25:45,846
+lax friedman all right so let's try another one
+
+627
+00:25:45,920 --> 00:25:47,683
+what are they saying about microsoft in the
+
+628
+00:25:47,684 --> 00:25:49,488
+transcript the speakers are discussing their
+
+629
+00:25:49,600 --> 00:25:52,050
+partnership with microsoft and how they have been
+
+630
+00:25:52,051 --> 00:25:54,501
+amazing partner to them all right awesome and now
+
+631
+00:25:54,560 --> 00:25:58,028
+also this function get response from query not only
+
+632
+00:25:58,029 --> 00:26:00,817
+returns the response but also the docs so
+
+633
+00:26:00,960 --> 00:26:03,663
+it's actually quite cool we can also have a look at
+
+634
+00:26:03,664 --> 00:26:06,102
+the documents for in this case that it's using
+
+635
+00:26:06,240 --> 00:26:08,966
+to get this answer so for this you also get the
+
+636
+00:26:08,967 --> 00:26:11,693
+reference to the original content which is very
+
+637
+00:26:11,760 --> 00:26:14,514
+convenient if you want to do additional research or
+
+638
+00:26:14,515 --> 00:26:16,999
+fact check your models to see if it's actually
+
+639
+00:26:17,120 --> 00:26:19,512
+giving you answers that are correct all right so now
+
+640
+00:26:19,513 --> 00:26:21,491
+we basically have a working app and all you
+
+641
+00:26:21,600 --> 00:26:24,197
+have to do is create a simple webpage around this
+
+642
+00:26:24,198 --> 00:26:26,901
+host it on a server or web app somewhere and people
+
+643
+00:26:27,040 --> 00:26:29,931
+can interact with this so fill in youtube url ask
+
+644
+00:26:29,932 --> 00:26:32,764
+questions and it will do that for you and really
+
+645
+00:26:32,880 --> 00:26:36,358
+when i look at all of this stuff my head really
+
+646
+00:26:36,359 --> 00:26:39,837
+starts to spin i have so many ideas because for
+
+647
+00:26:40,000 --> 00:26:42,880
+example what you can do with this approach alone
+
+648
+00:26:42,881 --> 00:26:45,701
+let's say you create a list of all the channels
+
+649
+00:26:45,760 --> 00:26:48,871
+that talk about a specific topic so for example you
+
+650
+00:26:48,872 --> 00:26:51,434
+want to stay up to date on ai you list all
+
+651
+00:26:51,520 --> 00:26:54,016
+the podcast channel all the popular channels and
+
+652
+00:26:54,017 --> 00:26:56,617
+then you create a little script that every now and
+
+653
+00:26:56,720 --> 00:26:59,788
+then checks if they have a new video public on their
+
+654
+00:26:59,789 --> 00:27:02,267
+page scrapes all the urls and then process
+
+655
+00:27:02,400 --> 00:27:04,948
+all of those videos with these functions and then
+
+656
+00:27:04,949 --> 00:27:07,549
+really engineer your prompt in such a way that you
+
+657
+00:27:07,680 --> 00:27:11,110
+can extract useful information from that that you
+
+658
+00:27:11,111 --> 00:27:14,331
+can use for example to do research or create a
+
+659
+00:27:14,400 --> 00:27:17,600
+social media account for example a twitter account
+
+660
+00:27:17,601 --> 00:27:20,737
+where you tweet about the latest updates in ai or
+
+661
+00:27:20,800 --> 00:27:23,605
+even a youtube channel where you want to talk about
+
+662
+00:27:23,606 --> 00:27:26,191
+ai you can really scout everything and then ask
+
+663
+00:27:26,320 --> 00:27:30,168
+okay what is the lex freedman postcards saying about
+
+664
+00:27:30,169 --> 00:27:32,981
+agi what is joe rogan saying about agi
+
+665
+00:27:33,120 --> 00:27:35,720
+and you can do that all automatically and then you
+
+666
+00:27:35,721 --> 00:27:37,905
+can combine this chaining it together with
+
+667
+00:27:38,000 --> 00:27:41,264
+different agents to store this information in files
+
+668
+00:27:41,265 --> 00:27:43,697
+on your you can see you can really the
+
+669
+00:27:43,760 --> 00:27:46,496
+possibilities are endless so like i've said i am
+
+670
+00:27:46,497 --> 00:27:49,290
+really going to dive deep into this because there
+
+671
+00:27:49,360 --> 00:27:52,545
+are so many opportunities right now and as i will
+
+672
+00:27:52,546 --> 00:27:55,861
+learn i will keep you guys up to date on my youtube
+
+673
+00:27:56,080 --> 00:27:58,992
+channel so if you're interested in this make sure to
+
+674
+00:27:58,993 --> 00:28:01,513
+subscribe so you don't miss any future videos
+
+675
+00:28:01,600 --> 00:28:04,525
+on this and really it's been amazing how many
+
+676
+00:28:04,526 --> 00:28:07,516
+requests i'm already getting from companies to
+
+677
+00:28:07,600 --> 00:28:10,834
+help them implement these tools help them with ai
+
+678
+00:28:10,835 --> 00:28:13,607
+i've been getting tons of messages so it's
+
+679
+00:28:13,760 --> 00:28:16,871
+really exciting so for me as a freelancer this is a
+
+680
+00:28:16,872 --> 00:28:19,617
+really exciting opportunity a really exciting
+
+681
+00:28:19,680 --> 00:28:22,893
+moment to basically also start to work with smaller
+
+682
+00:28:22,894 --> 00:28:25,351
+clients smaller companies and implement
+
+683
+00:28:25,440 --> 00:28:28,390
+these tools and now if you also feel like you want
+
+684
+00:28:28,391 --> 00:28:30,751
+to do more with this you want to exploit
+
+685
+00:28:30,880 --> 00:28:33,226
+this opportunity and start to work on your own
+
+686
+00:28:33,227 --> 00:28:35,267
+freelance projects but don't really know
+
+687
+00:28:35,360 --> 00:28:38,220
+where to start then you should really check out data
+
+688
+00:28:38,221 --> 00:28:40,366
+freelancer which is a mastermind that i
+
+689
+00:28:40,480 --> 00:28:42,976
+host specifically created for data professionals
+
+690
+00:28:42,977 --> 00:28:45,317
+that want to kickstart launch their freelance
+
+691
+00:28:45,440 --> 00:28:48,194
+career in data but don't really know where to start
+
+692
+00:28:48,195 --> 00:28:50,355
+so in this mastermind you will literally
+
+693
+00:28:50,480 --> 00:28:53,616
+learn everything you need to get started to start
+
+694
+00:28:53,617 --> 00:28:56,177
+landing your first paid projects i share
+
+695
+00:28:56,240 --> 00:28:58,740
+all my systems and models that i've developed over
+
+696
+00:28:58,741 --> 00:29:01,091
+the years to basically systemize freelancing in
+
+697
+00:29:01,200 --> 00:29:04,000
+data to make sure you never run out of clients and
+
+698
+00:29:04,001 --> 00:29:06,745
+you will become part of a community of other data
+
+699
+00:29:06,800 --> 00:29:09,044
+professionals that are working on their freelancing
+
+700
+00:29:09,045 --> 00:29:11,245
+career and we are all here together to work on the
+
+701
+00:29:11,360 --> 00:29:13,660
+same goals of making more money working on fun
+
+702
+00:29:13,661 --> 00:29:16,011
+projects and creating freedom that's what we're
+
+703
+00:29:16,160 --> 00:29:18,410
+trying to do here feels like hanging out with
+
+704
+00:29:18,411 --> 00:29:20,611
+friends but with real business results so if
+
+705
+00:29:20,720 --> 00:29:23,070
+you consider freelancing or want to take advantage
+
+706
+00:29:23,071 --> 00:29:25,468
+of all the amazing opportunities that are out there
+
+707
+00:29:25,520 --> 00:29:28,170
+right now in the world of ai but don't really know
+
+708
+00:29:28,171 --> 00:29:30,556
+where to start then check out data freelancer
+
+709
+00:29:30,640 --> 00:29:41,224
+first link in the description and sign up for the
+
+710
+00:29:41,225 --> 00:29:43,169
+wait list
+
